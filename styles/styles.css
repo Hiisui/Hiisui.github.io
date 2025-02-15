@@ -307,6 +307,10 @@ h2 {
         display: none !important;
     }
 
+    .register-box {
+        width: 90%;
+    }
+
     .profile-box {
         width: 100%;
         max-width: none;
@@ -330,4 +334,3 @@ h2 {
         text-align: center;
     }
 }
-
