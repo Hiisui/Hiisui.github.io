@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timeline - LiveMO</title>
+    <link rel="stylesheet" href="styles/styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+    <div class="container d-flex flex-column align-items-center py-4">
+        <!-- Botón para regresar al perfil -->
+        <div class="w-100 d-flex justify-content-end mb-3">
+            <a href="perfil.html" class="btn btn-outline-light return-profile-btn">👤 Ir a mi Perfil</a>
+        </div>
+
+        <h2 class="text-light mb-4">Timeline</h2>
+
+        <!-- Sección de publicaciones -->
+        <div class="row w-100">
+            <script>
+                const publicaciones = [
+                    { usuario: "johndoe", nombre: "John Doe", img: "https://picsum.photos/400/300", desc: "🌆 Capturando el atardecer en la ciudad", likes: 120, tiempo: "2h" },
+                    { usuario: "janesmith", nombre: "Jane Smith", video: "https://samplelib.com/lib/preview/mp4/sample-5s.mp4", desc: "🎥 Probando mi nueva cámara en el parque", likes: 89, tiempo: "5h" },
+                    { usuario: "travelguru", nombre: "Michael Brown", img: "https://picsum.photos/403/303", desc: "🏔️ Aventuras en la montaña", likes: 145, tiempo: "8h" },
+                    { usuario: "foodlover", nombre: "Emily White", img: "https://picsum.photos/402/302", desc: "🍔 Probando la mejor hamburguesa de la ciudad", likes: 200, tiempo: "1d" },
+                    { usuario: "petfanatic", nombre: "David Green", img: "https://picsum.photos/405/305", desc: "🐶 Mi perro disfrutando del parque", likes: 78, tiempo: "3d" },
+                    { usuario: "gamerzone", nombre: "Alex Red", video: "https://samplelib.com/lib/preview/mp4/sample-10s.mp4", desc: "🎮 Probando un nuevo videojuego para streaming", likes: 95, tiempo: "1w" },
+                    { usuario: "fitnesslife", nombre: "Laura Blue", img: "https://picsum.photos/406/306", desc: "💪 Día de entrenamiento intenso", likes: 160, tiempo: "2w" },
+                    { usuario: "travelqueen", nombre: "Sophia Gold", img: "https://picsum.photos/407/307", desc: "🌍 Explorando nuevos lugares", likes: 250, tiempo: "3w" },
+                    { usuario: "techgeek", nombre: "Chris Black", img: "https://picsum.photos/408/308", desc: "📱 Probando el nuevo smartphone", likes: 130, tiempo: "1m" }
+                ];
+
+                $(document).ready(function() {
+                    publicaciones.forEach(pub => {
+                        let media = pub.img ? `<img src="${pub.img}" class="img-fluid rounded" alt="Post">` 
+                                            : `<video class="img-fluid rounded" controls><source src="${pub.video}" type="video/mp4"></video>`;
+                        $(".row").append(`
+                            <div class="col-md-6 col-lg-4 mb-4">
+                                <div class="timeline-post p-3">
+                                    <div class="timeline-header d-flex justify-content-between">
+                                        <div class="timeline-user d-flex align-items-center mb-2">
+                                            <img src="https://picsum.photos/50" class="rounded-circle me-2" alt="User">
+                                            <div>
+                                                <strong class="text-light">${pub.usuario}</strong>
+                                                <p class="text-secondary mb-0">${pub.nombre}</p>
+                                            </div>
+                                        </div>
+                                        <span class="text-secondary post-time">${pub.tiempo}</span>
+                                    </div>
+                                    ${media}
+                                    <p class="text-light mt-2">${pub.desc}</p>
+                                    <div class="timeline-info">
+                                        <span class="text-light likes-count">${pub.likes} Likes</span>
+                                        <button class="btn btn-outline-light like-btn">❤️</button>
+                                    </div>
+                                </div>
+                            </div>
+                        `);
+                    });
+
+                    $(".like-btn").click(function() {
+                        let likeText = $(this).siblings(".likes-count");
+                        let currentLikes = parseInt(likeText.text().split(" ")[0]);
+
+                        if ($(this).hasClass("liked")) {
+                            $(this).removeClass("liked");
+                            likeText.text((currentLikes - 1) + " Likes");
+                        } else {
+                            $(this).addClass("liked");
+                            likeText.text((currentLikes + 1) + " Likes");
+                        }
+                    });
+                });
+            </script>
+        </div>
+    </div>
+</body>
+</html>
